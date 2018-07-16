@@ -15,5 +15,5 @@ When a partcular email thread is selected, the page is redirected to another pag
 #### Mailing Thread
 ![alt text](images/Thread.png)
 
-This analysis of emails is helpful for organisations which want to improve relationships with their customers and also prioritize different mails in the inbox. 
+This analysis of emails is helpful for organisations that want to improve relationships with their customers and also prioritize different mails in their inbox. 
 
