@@ -9,7 +9,8 @@ This is how the Inbox will look like. The rightmost column depicts the transitio
 ![alt text](images/Inbox.png)
 
 When a partcular email thread is selected, the page is redirected to another page that shows the mails sent back and forth between the client and admin. Along with each message the client has sent, a sentiment score is shown. 
-![alt_text](images/Thread.png)
+
+![alt text](images/Thread.png)
 
 This analysis of emails is helpful for organisations which want to improve relationships with their customers and also prioritize different mails in the inbox. 
 
