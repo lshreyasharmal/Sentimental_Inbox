@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% block content %}
+{%load staticfiles%}
+<html lang="en">
+	<head>
+		<title>Conversation</title>
+		<meta id="my-data" data-name="{{final}}">
+		<style type="text/css">
+		body {
+		    margin: 0 auto;
+		    max-width: 800px;
+		    padding: 0 20px;
+		}
+
+		.container {
+		    border: 2px solid #dedede;
+		    background-color: #f1f1f1;
+		    border-radius: 5px;
+		    padding: 10px;
+		    margin: 10px 0;
+		}
+
+		.darker {
+		    border-color: #ccc;
+		    background-color: #ddd;
+		}
+
+		.container::after {
+		    content: "";
+		    clear: both;
+		    display: table;
+		}
+
+		.container img {
+		    float: left;
+		    max-width: 60px;
+		    width: 100%;
+		    margin-right: 20px;
+		    border-radius: 50%;
+		}
+
+		.container img.right {
+		    float: right;
+		    margin-left: 20px;
+		    margin-right:0;
+		}
+	</style>
+	</head>
+	<body>
+			<h1>Conversation</h1>
+			{%for m in final%}
+			{%if "Team" in m.msg %}
+				<div class="container darker">
+					<img src="{% static 'mail/img/team.png' %}" alt="Avatar"class="right" style="width:100%;">
+					<p>{{m.msg}}</p>
+					<p>{{m.score}}</p>
+				</div>
+					
+			{%else%}	
+				<div class="container">
+					<img src="{% static 'mail/img/profile.jpg' %}" alt="Avatar" style="width:100%;">
+					<p>{{m.msg}}</p>
+					<p id = "score">{{m.score}}</p>
+				</div>
+			{%endif%}
+			{%endfor%}
+	</body>
+{% endblock %}
+</html>
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% block content %}
+<html lang="en">
+	<head>
+		<!-- <span class="glyphicon glyphicon-envelope"></span> -->
+		<title>Inbox</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style>
+			body{
+				background-color: #E0E0E0;
+			}
+			.my_text
+            {
+                font-family:    "Times New Roman", Times, serif;
+                font-size:      40px;
+                font-weight:    bold;  
+                padding-left: 110px;
+                padding-top: 10px;
+                color: #248DB6;
+            }
+
+            .inbox_table {
+            	background-color: white;
+			    margin-left: 100px;
+			    margin-right: 100px;
+			    margin-bottom: 100p;
+			    margin-top: 10px;
+			    border: 1px solid #737373;
+			    size: 80%;
+			}
+		</style>
+	</head>
+	<body>
+
+
+
+		<div class="my_text">
+       		<h1><span class="glyphicon glyphicon-envelope"></span> Inbox </h1>
+    	</div>
+
+		<div class = "inbox_table">
+			<table class="table table-striped table-bordered table-hover">
+			<div id="table_head">
+				<thead>
+				<tr>
+				<th >#</th>
+				<th >Subject</th>
+				<th >Scores</th>
+				</tr>
+				</thead>
+			</div>
+
+			<div id= "table_body">
+				<tbody>
+					{% for row in result %}
+						<tr class="d-flex" onclick = "myfunc(this)">
+						<td>{{forloop.counter}}</td>
+						<td>{{row.subject}}</td>
+						<td><canvas class="myCanvas" width="150" height="10" >{{row.scores}}</canvas></td>
+						<script type="text/javascript">
+								function myfunc(x){
+								location.href = "conversation/"+x.rowIndex;}
+							</script>
+						</tr> 
+					{% endfor %}	
+					<script type="text/javascript">
+						var c = document.getElementsByClassName("myCanvas");
+						
+						for(var i =0;i<c.length;i++){
+							var html = c[i].innerHTML;
+							var ctx = c[i].getContext("2d");
+							var grd = ctx.createLinearGradient(0, 0, 100, 0);
+							var rsp = html.replace("[","");
+							rsp = rsp.replace("]","");
+							var spString = rsp.split(",");
+							var s = 0;
+							if(spString.length!=1)
+								s = 1/(spString.length-1);
+
+							var snumber = 0;
+							for(var j =0;j< spString.length;j++){
+								var sp = Number(spString[j]);
+								var color = "";
+								if(sp < -0.05)
+									color = "red";
+								else if(sp > 0.05)
+									color = "green";
+								else
+									color = "yellow";
+								grd.addColorStop(snumber,color);
+								console.log(snumber,color);
+								snumber += s;
+							}
+							// grd.addColorStop(0.3, "black");
+							// grd.addColorStop(0.5, "red");
+							// grd.addColorStop(0.7, "green");
+							// grd.addColorStop(.8, "blue");
+							console.log("End");
+
+
+							ctx.fillStyle = grd;
+							ctx.fillRect(0, 0, 100, 10);
+						}
+						</script>												
+				</tbody>
+			</div>
+
+			</table>
+		</div>
+
+
+
+		
+	</body>
+
+{% endblock %}
+</html>
